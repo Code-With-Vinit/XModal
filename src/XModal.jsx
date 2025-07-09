@@ -68,7 +68,7 @@ const XModal = () => {
     const today = new Date();
     const selectedDate = new Date(dob);
     if (selectedDate > today) {
-      alert("Invalid date of birth. Date of birth cannot be in the future.");
+      alert("Invalid date of birth. Please enter a valid date.");
       return;
     }
 
@@ -83,66 +83,63 @@ const XModal = () => {
   };
 
   return (
-    <div className="modal" style={{ padding: "20px", fontFamily: "Arial" }}>
-        <h1>User Details Modal</h1>
-      <button onClick={() => setShowModal(true)}>Open Form</button>
+    <div style={{ padding: "20px", fontFamily: "Arial", display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+      <h1>User Details Modal</h1>
+      <button style={{display:"block"}} onClick={() => setShowModal(true)}>Open Form</button>
 
       {showModal && (
-        <div className="modal-content"
-             ref={modalRef}
-             style={{
-               backgroundColor: "white",
-               padding: "20px",
-               border: "1px solid #ccc",
-               boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-               marginTop: "20px",
-               maxWidth: "300px"
-             }}>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="email">Email:</label>
-              <input
-                type="text"
-                id="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="phone">Phone:</label>
-              <input
-                type="text"
-                id="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="dob">Date of Birth:</label>
-              <input
-                type="date"
-                id="dob"
-                value={formData.dob}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
-          </form>
+        <div className="modal" style={overlayStyles}>
+          <div
+            className="modal-content"
+            ref={modalRef}
+            style={modalStyles}
+          >
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  id="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="text"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="phone">Phone:</label>
+                <input
+                  type="text"
+                  id="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="dob">Date of Birth:</label>
+                <input
+                  type="date"
+                  id="dob"
+                  value={formData.dob}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <button type="submit" className="submit-button">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>
@@ -150,3 +147,27 @@ const XModal = () => {
 };
 
 export default XModal;
+
+// CSS styles (inline for now)
+const overlayStyles = {
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100vw",
+  height: "100vh",
+  backgroundColor: "rgba(0, 0, 0, 0.3)",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 999,
+};
+
+const modalStyles = {
+  backgroundColor: "white",
+  padding: "20px",
+  border: "1px solid #ccc",
+  borderRadius: "4px",
+  boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+  maxWidth: "300px",
+  width: "100%",
+};
